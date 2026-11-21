@@ -25,7 +25,7 @@ jobs:
         run: |
           sudo swapoff -a || true
           sudo rm -f /swapfile /mnt/swapfile || true
-          sudo fallocate -l 16G /swapfile
+          sudo fallocate -l 8G /swapfile
           sudo chmod 600 /swapfile
           sudo mkswap /swapfile
           sudo swapon /swapfile
@@ -55,6 +55,7 @@ jobs:
           mkdir -p .repo/local_manifests
           curl -s https://raw.githubusercontent.com/nonoobik/local_manifests/main/Infinix-X6716.xml -o .repo/local_manifests/Infinix-X6716.xml
           repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+          rm -rf .repo
 
       - name: Build ROM
         run: |
