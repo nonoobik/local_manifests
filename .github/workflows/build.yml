@@ -31,6 +31,7 @@ jobs:
           sudo swapon /swapfile
           free -h
           df -h
+          sudo mkdir -p /mnt/lineage && sudo chown -R $USER:$USER /mnt/lineage
 
       - name: Install Build Dependencies
         run: |
@@ -49,8 +50,8 @@ jobs:
 
       - name: Sync LineageOS 20 & Device Trees
         run: |
-          mkdir -p ~/android/lineage
-          cd ~/android/lineage
+          mkdir -p /mnt/lineage
+          cd /mnt/lineage
           repo init -u https://github.com/LineageOS/android.git -b lineage-20.0 --git-lfs --depth=1
           mkdir -p .repo/local_manifests
           curl -s https://raw.githubusercontent.com/nonoobik/local_manifests/main/Infinix-X6716.xml -o .repo/local_manifests/Infinix-X6716.xml
@@ -59,10 +60,8 @@ jobs:
 
       - name: Build ROM
         run: |
-          cd ~/android/lineage
-          export USE_CCACHE=1
-          export CCACHE_EXEC=/usr/bin/ccache
-          ccache -M 20G
+          cd /mnt/lineage
+          export USE_CCACHE=0
           source build/envsetup.sh
           lunch lineage_X6716-userdebug
           mka bacon -j$(nproc --all)
