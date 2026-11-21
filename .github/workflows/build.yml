@@ -25,13 +25,13 @@ jobs:
         run: |
           sudo swapoff -a || true
           sudo rm -f /swapfile /mnt/swapfile || true
-          sudo fallocate -l 8G /swapfile
-          sudo chmod 600 /swapfile
-          sudo mkswap /swapfile
-          sudo swapon /swapfile
-          free -h
+          sudo fallocate -l 16G /mnt/swapfile
+          sudo chmod 600 /mnt/swapfile
+          sudo mkswap /mnt/swapfile
+          sudo swapon /mnt/swapfile
+          sudo mkdir -p /mnt/lineage
+          sudo chown -R $USER:$USER /mnt/lineage
           df -h
-          sudo mkdir -p /mnt/lineage && sudo chown -R $USER:$USER /mnt/lineage
 
       - name: Install Build Dependencies
         run: |
@@ -64,7 +64,7 @@ jobs:
           export USE_CCACHE=0
           source build/envsetup.sh
           lunch lineage_X6716-userdebug
-          mka bacon -j$(nproc --all)
+          mka bacon -j2
 
       - name: Upload ROM to GitHub Releases
         uses: softprops/action-gh-release@v2
