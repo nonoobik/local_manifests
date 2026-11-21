@@ -63,7 +63,7 @@ jobs:
           export CCACHE_EXEC=/usr/bin/ccache
           ccache -M 20G
           source build/envsetup.sh
-          lunch lineage_Infinix-X6716-userdebug
+          lunch lineage_X6716-userdebug
           mka bacon -j$(nproc --all)
 
       - name: Upload ROM to GitHub Releases
@@ -73,6 +73,6 @@ jobs:
           tag_name: build-${{ github.run_number }}
           name: LineageOS 20.0 for Infinix X6716 (#${{ github.run_number }})
           files: |
-            /home/runner/android/lineage/out/target/product/Infinix-X6716/lineage-*.zip
-            /home/runner/android/lineage/out/target/product/Infinix-X6716/boot.img
+            /home/runner/android/lineage/out/target/product/X6716/lineage-*.zip
+            /home/runner/android/lineage/out/target/product/X6716/boot.img
             
