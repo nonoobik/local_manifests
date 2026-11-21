@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
     <!-- Репозитории Infinix Note 30i (X6716) -->
-    <project path="device/infinix/Infinix-X6716" name="nonoobik/android_device_infinix_Infinix-X6716" remote="github" revision="main" />
-    <project path="vendor/infinix/Infinix-X6716" name="nonoobik/android_vendor_infinix_Infinix-X6716" remote="github" revision="main" />
-    <project path="device/infinix/Infinix-X6716-kernel" name="nonoobik/android_device_infinix_Infinix-X6716-kernel" remote="github" revision="main" />
+    <project path="device/infinix/X6716" name="nonoobik/android_device_infinix_X6716" remote="github" revision="main" />
+    <project path="vendor/infinix/X6716" name="nonoobik/android_vendor_infinix_X6716" remote="github" revision="main" />
+    <project path="device/infinix/X6716-kernel" name="nonoobik/android_device_infinix_X6716-kernel" remote="github" revision="main" />
 
     <!-- Общие зависимости MediaTek (LineageOS 20 / Android 13) -->
     <project path="device/mediatek/sepolicy_vndr" name="LineageOS/android_device_mediatek_sepolicy_vndr" remote="github" revision="lineage-20" />
