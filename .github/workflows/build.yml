@@ -65,6 +65,7 @@ jobs:
         run: |
           cd /mnt/lineage
           export USE_CCACHE=0
+          sed -i '/terminfo/d' vendor/lineage/config/common.mk || true
           source build/envsetup.sh
           lunch lineage_X6716-userdebug
           mka bacon -j2
