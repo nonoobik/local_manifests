@@ -57,6 +57,9 @@ jobs:
           curl -s https://raw.githubusercontent.com/nonoobik/local_manifests/main/Infinix-X6716.xml -o .repo/local_manifests/Infinix-X6716.xml
           repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
           rm -rf .repo
+          mkdir -p .repo/repo
+          printf '#!/usr/bin/env python3\nprint("<manifest/>")\n' > .repo/repo/repo
+          chmod +x .repo/repo/repo
 
       - name: Build ROM
         run: |
