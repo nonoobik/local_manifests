@@ -68,6 +68,7 @@ jobs:
           sed -i '/terminfo/d' vendor/lineage/config/common.mk || true
           source build/envsetup.sh
           lunch lineage_X6716-userdebug
+          mka vendor_manifest.xml -j2
           mka bacon -j2
 
       - name: Upload ROM to GitHub Releases
