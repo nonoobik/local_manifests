@@ -25,14 +25,14 @@ jobs:
         run: |
           sudo swapoff -a || true
           sudo rm -f /swapfile /mnt/swapfile || true
-          sudo fallocate -l 12G /swapfile
-          sudo chmod 600 /swapfile
-          sudo mkswap /swapfile
-          sudo swapon /swapfile
+          sudo fallocate -l 14G /mnt/swapfile
+          sudo chmod 600 /mnt/swapfile
+          sudo mkswap /mnt/swapfile
+          sudo swapon /mnt/swapfile
           sudo mkdir -p /mnt/lineage
           sudo chown -R $USER:$USER /mnt/lineage
           df -h
-
+          
       - name: Install Build Dependencies
         run: |
           sudo apt-get update
