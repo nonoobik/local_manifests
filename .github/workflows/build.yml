@@ -25,10 +25,10 @@ jobs:
         run: |
           sudo swapoff -a || true
           sudo rm -f /swapfile /mnt/swapfile || true
-          sudo fallocate -l 16G /mnt/swapfile
-          sudo chmod 600 /mnt/swapfile
-          sudo mkswap /mnt/swapfile
-          sudo swapon /mnt/swapfile
+          sudo fallocate -l 12G /swapfile
+          sudo chmod 600 /swapfile
+          sudo mkswap /swapfile
+          sudo swapon /swapfile
           sudo mkdir -p /mnt/lineage
           sudo chown -R $USER:$USER /mnt/lineage
           df -h
@@ -56,7 +56,7 @@ jobs:
           mkdir -p .repo/local_manifests
           curl -s https://raw.githubusercontent.com/nonoobik/local_manifests/main/Infinix-X6716.xml -o .repo/local_manifests/Infinix-X6716.xml
           repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
-          rm -rf .repo
+          rm -rf .repo prebuilts/*/darwin-x86 prebuilts/*/*/darwin-x86
           mkdir -p .repo/repo
           printf '#!/usr/bin/env python3\nprint("<manifest/>")\n' > .repo/repo/repo
           chmod +x .repo/repo/repo
@@ -65,6 +65,7 @@ jobs:
         run: |
           cd /mnt/lineage
           export USE_CCACHE=0
+          export WITH_DEXPREOPT=false
           sed -i '/terminfo/d' vendor/lineage/config/common.mk || true
           source build/envsetup.sh
           lunch lineage_X6716-userdebug
@@ -78,6 +79,6 @@ jobs:
           tag_name: build-${{ github.run_number }}
           name: LineageOS 20.0 for Infinix X6716 (#${{ github.run_number }})
           files: |
-            /home/runner/android/lineage/out/target/product/X6716/lineage-*.zip
-            /home/runner/android/lineage/out/target/product/X6716/boot.img
+            /mnt/lineage/out/target/product/X6716/lineage-*.zip
+            /mnt/lineage/out/target/product/X6716/boot.img
             
